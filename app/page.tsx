@@ -33,9 +33,17 @@ export default function Home() {
     setResponse(phrases[randomIndex]);
   }
 
-  const handleYesBtn = () => {
-    setImage(!image);
-  }
+  const handleYesPointerEnter = (e: React.PointerEvent<HTMLButtonElement>) => {
+    // Touch devices pe hover-like events se button flicker/vibrate ho sakta hai,
+    // isliye image swap sirf mouse hover pe karte hain.
+    if (e.pointerType !== "mouse") return;
+    setImage(true);
+  };
+
+  const handleYesPointerLeave = (e: React.PointerEvent<HTMLButtonElement>) => {
+    if (e.pointerType !== "mouse") return;
+    setImage(false);
+  };
 
   return (
     <div className="container">
@@ -55,7 +63,8 @@ export default function Home() {
           <Link href='/success'>
             <button
               className="yes-button button-base button-green"
-              onMouseOver={handleYesBtn} onMouseOut={handleYesBtn}
+              onPointerEnter={handleYesPointerEnter}
+              onPointerLeave={handleYesPointerLeave}
             >
               Yes
             </button>
