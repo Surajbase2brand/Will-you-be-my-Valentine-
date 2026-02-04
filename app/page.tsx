@@ -33,6 +33,13 @@ export default function Home() {
     setResponse(phrases[randomIndex]);
   }
 
+  const handleNoPointerEnter = (e: React.PointerEvent<HTMLButtonElement>) => {
+    // Touch devices pe hover-like events se "No" button random move hota rahta hai
+    // aur "Yes" click block ho sakta hai. Isliye move sirf mouse hover pe.
+    if (e.pointerType !== "mouse") return;
+    handleNoBtn();
+  };
+
   const handleYesPointerEnter = (e: React.PointerEvent<HTMLButtonElement>) => {
     // Touch devices pe hover-like events se button flicker/vibrate ho sakta hai,
     // isliye image swap sirf mouse hover pe karte hain.
@@ -69,8 +76,11 @@ export default function Home() {
               Yes
             </button>
           </Link>
-          <button className='no-button button-base button-red' style={coord ? { position: 'absolute', top: coord.x, right: coord.y } : undefined}
-            onClick={handleNoBtn} onMouseOver={handleNoBtn}
+          <button
+            className='no-button button-base button-red'
+            style={coord ? { position: 'absolute', top: coord.x, right: coord.y } : undefined}
+            onClick={handleNoBtn}
+            onPointerEnter={handleNoPointerEnter}
           >{response}</button>
         </div>
       </section>

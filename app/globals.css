@@ -69,6 +69,7 @@ p {
   flex-direction: column; 
   gap: 20px; 
   margin-top: 20px;
+  position: relative;
 }
 
 .yes-button,
@@ -80,6 +81,15 @@ p {
   cursor: pointer;
   font-size: 18px;
   margin-top: 10px;
+}
+
+.yes-button {
+  position: relative;
+  z-index: 2;
+}
+
+.no-button {
+  z-index: 1;
 }
 
 .button-base {
