@@ -5,8 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 interface Coordinates {
-  x: string;
-  y: string;
+  top: string;
+  left: string;
 }
 
 export default function Home() {
@@ -15,10 +15,23 @@ export default function Home() {
   const [response, setResponse] = useState('No');
 
   const handleNoBtn = () => {
-    const x = Math.random() * 60;
-    const y = Math.random() * 60;
+    // Goal: "No" button kabhi "Yes" ke upar overlap na kare.
+    // Desktop (>=768px): "No" ko mostly right side me rakho.
+    // Mobile: "No" ko mostly lower area me rakho.
+    const isDesktop =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(min-width: 768px)").matches;
 
-    setCoords({ x: `${x}%`, y: `${y}%` });
+    const top = isDesktop
+      ? 5 + Math.random() * 55 // 5% - 60%
+      : 55 + Math.random() * 35; // 55% - 90%
+
+    const left = isDesktop
+      ? 60 + Math.random() * 30 // 60% - 90%
+      : 15 + Math.random() * 70; // 15% - 85%
+
+    setCoords({ top: `${top}%`, left: `${left}%` });
 
     const phrases = [
       "Wrong button ❌",
@@ -78,7 +91,7 @@ export default function Home() {
           </Link>
           <button
             className='no-button button-base button-red'
-            style={coord ? { position: 'absolute', top: coord.x, right: coord.y } : undefined}
+            style={coord ? { position: 'absolute', top: coord.top, left: coord.left } : undefined}
             onClick={handleNoBtn}
             onPointerEnter={handleNoPointerEnter}
           >{response}</button>
