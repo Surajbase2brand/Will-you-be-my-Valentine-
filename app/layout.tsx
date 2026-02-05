@@ -22,11 +22,11 @@ export default function RootLayout({
         <footer className="site-footer">
           {"Designed & Created by "}
           <a
-            href="https://in.linkedin.com/in/suraj-parkash-mandhan-556a61246"
+            href="https://www.instagram.com/heyyavvi?igsh=b29xYm5zbjF6NTJ0&utm_source=qr"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Suraj Parkash
+            Avvi
           </a>
         </footer>
       </body>
